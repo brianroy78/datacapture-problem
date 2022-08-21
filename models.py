@@ -1,10 +1,6 @@
 from dataclasses import dataclass
-from functools import partial
 from itertools import accumulate
-from operator import add
-from typing import Union
 
-from core import compose
 from settings import MAX_VALUE
 
 
@@ -27,6 +23,11 @@ class Stats:
         """Returns the amount of number that are greater than the given number"""
         return self._data[value].greater
 
+    def between(self, a: int, b: int) -> int:
+        """Returns the amount of numbers between two given numbers, includes both numbers"""
+        lowest, highest = (a, b) if a < b else (b, a)
+        return self._data[0].greater - (self._data[lowest].less + self._data[highest].greater)
+
 
 def calc_less_greater(last_data: Data, current_data: Data) -> Data:
     """Calculates the current less and greater values base on the last data"""
@@ -48,8 +49,4 @@ class DataCapture:
     def build_stats(self) -> Stats:
         """Returns the processed stats"""
         self._data[0].greater = self._total - self._data[0].count
-        return compose(
-            partial(accumulate, func=calc_less_greater),
-            list,
-            Stats
-        )(self._data)
+        return Stats(list(accumulate(self._data, calc_less_greater)))

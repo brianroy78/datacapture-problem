@@ -42,33 +42,28 @@ than 4)
 In order to meet the constraints of this challenge I'll trade off memory space to gain compute speed.\
 
 Points to consider:
-* Since there are few values (1000) it is sensible to think about using a list of 1000 elements.
-* I'll use the value as index in the list.
-* Repeated numbers should be allowed,so I will store how many times a number is repeated in the list.
+* Since there are no constraints about memory space, using a list of 1000 elements representing each possible number is allowed.
+* Each value will be the index of the list and the element in the list will be a counter of how many that value was added.
 * The final step will be traverse the list in order and store the amount of number that are less and greater of each
-  number in a model.
-* Finally, to get to amount of values less or greater than a given number It will be mater of accessing the object and
-  returning the desire value
-* In order to return the result between two numbers, the function will return the total minus the abs from the less from
-  one value minus the greater from the other
+  number using a data class.
+* Finally, to get the amount of values less or greater than a given number the function will return the less or greater value of the data object located in the list using the given number as index.
+* In order to return the result between two numbers, the function will return the total minus the sum of the lowest less and the highest greater values
 
 ## Setup
 
 - Install Python 3.10 or a higher version.
 - Clone this repo
 - Go to the root folder.
-- Create a virtual environment.
+- Create a virtual environment `python -m venv .env`.
 - Activate the virtual environment.
-- Install the requirements in the `requirements.txt` file.
+- Install the requirements`pip install -r requirements.txt`.
 
 ## Usage
 
-With the Setup steps done.\
 Run the command: `python main.py`
 
 ## Testing
 
-With the Setup steps done.\
 Run the command: `mypy . && python -m unittest tests.py` 
 
 

@@ -71,6 +71,17 @@ class TestStats(unittest.TestCase):
         result = stats.less(MAX_VALUE)
         self.assertEqual(result, 5)
 
+    def test_less_input_repetitive_numbers_return_four(self):
+        capture = DataCapture()
+        capture.add(1)
+        capture.add(1)
+        capture.add(3)
+        capture.add(3)
+        capture.add(5)
+        stats = capture.build_stats()
+        result = stats.less(5)
+        self.assertEqual(result, 4)
+
     def test_greater_input_random_disorder_numbers_return_two(self):
         capture = DataCapture()
         capture.add(5)
@@ -138,6 +149,17 @@ class TestStats(unittest.TestCase):
         result = stats.greater(MAX_VALUE)
         self.assertEqual(result, 0)
 
+    def test_greater_input_repetitive_numbers_return_four(self):
+        capture = DataCapture()
+        capture.add(1)
+        capture.add(4)
+        capture.add(4)
+        capture.add(5)
+        capture.add(5)
+        stats = capture.build_stats()
+        result = stats.greater(1)
+        self.assertEqual(result, 4)
+
     def test_between_input_random_disorder_numbers_return_two(self):
         capture = DataCapture()
         capture.add(5)
@@ -145,9 +167,10 @@ class TestStats(unittest.TestCase):
         capture.add(7)
         capture.add(10)
         capture.add(55)
+        capture.add(5)
         stats = capture.build_stats()
         result = stats.between(4, 40)
-        self.assertEqual(result, 3)
+        self.assertEqual(result, 4)
 
     def test_between_input_exact_numbers_return_three(self):
         capture = DataCapture()
@@ -171,3 +194,42 @@ class TestStats(unittest.TestCase):
         stats = capture.build_stats()
         result = stats.between(0, MAX_VALUE)
         self.assertEqual(result, 5)
+
+    def test_between_input_higher_first_return_four(self):
+        capture = DataCapture()
+        capture.add(1)
+        capture.add(2)
+        capture.add(3)
+        capture.add(3)
+        capture.add(4)
+        capture.add(5)
+        stats = capture.build_stats()
+        result = stats.between(4, 2)
+        self.assertEqual(result, 4)
+
+    def test_between_input_repetitive_numbers_return_four(self):
+        capture = DataCapture()
+        capture.add(1)
+        capture.add(1)
+        capture.add(3)
+        capture.add(3)
+        capture.add(4)
+        capture.add(4)
+        stats = capture.build_stats()
+        result = stats.between(1, 10)
+        self.assertEqual(result, 6)
+
+    def test_less_greater_between_input_sample_return_two_four_two(self):
+        capture = DataCapture()
+        capture.add(3)
+        capture.add(9)
+        capture.add(3)
+        capture.add(4)
+        capture.add(6)
+        stats = capture.build_stats()
+        less = stats.less(4)
+        between = stats.between(3, 6)
+        greater = stats.greater(4)
+        self.assertEqual(less, 2)
+        self.assertEqual(between, 4)
+        self.assertEqual(greater, 2)
