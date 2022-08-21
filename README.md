@@ -12,7 +12,7 @@
 The DataCapture object accepts numbers and returns an object for querying
 statistics about the inputs. Specifically, the returned object supports
 querying how many numbers in the collection are less than a value, greater
-than a value, or within a range.
+than a value, or within a range.\
 Here’s the program skeleton in Python to explain the structure:
 
 ```
@@ -39,7 +39,7 @@ than 4)
 
 ## Solution
 
-In order to meet the constraints of this challenge I'll trade off memory space to gain compute speed.\
+In order to meet the constraints of this challenge I'll trade off memory space to gain compute speed.
 
 Points to consider:
 * Since there are no constraints about memory space, using a list of 1000 elements representing each possible number is allowed.
