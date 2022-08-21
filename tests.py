@@ -137,3 +137,37 @@ class TestStats(unittest.TestCase):
         stats = capture.build_stats()
         result = stats.greater(MAX_VALUE)
         self.assertEqual(result, 0)
+
+    def test_between_input_random_disorder_numbers_return_two(self):
+        capture = DataCapture()
+        capture.add(5)
+        capture.add(3)
+        capture.add(7)
+        capture.add(10)
+        capture.add(55)
+        stats = capture.build_stats()
+        result = stats.between(4, 40)
+        self.assertEqual(result, 3)
+
+    def test_between_input_exact_numbers_return_three(self):
+        capture = DataCapture()
+        capture.add(1)
+        capture.add(2)
+        capture.add(3)
+        capture.add(3)
+        capture.add(4)
+        capture.add(5)
+        stats = capture.build_stats()
+        result = stats.between(2, 4)
+        self.assertEqual(result, 4)
+
+    def test_between_input_lowest_and_highest_possible_numbers_return_total(self):
+        capture = DataCapture()
+        capture.add(1)
+        capture.add(2)
+        capture.add(3)
+        capture.add(4)
+        capture.add(5)
+        stats = capture.build_stats()
+        result = stats.between(0, MAX_VALUE)
+        self.assertEqual(result, 5)
