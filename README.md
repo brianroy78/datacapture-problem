@@ -69,7 +69,7 @@ Run the command: `python main.py`
 ## Testing
 
 With the Setup steps done.\
-Run the command: `mypy . & python -m unittest tests.py` 
+Run the command: `mypy . && python -m unittest tests.py` 
 
 
 
